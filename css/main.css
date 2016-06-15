@@ -1,0 +1,42 @@
+h1 {
+  font-family: 'Baloo Bhai', cursive;
+  font-size: 68px;
+  text-align: center;
+}
+ul {
+  /*background-color: green;*/
+  width: 300px;
+  min-height: 300px;
+  display: inline-flex;
+  margin: 10px;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  vertical-align: bottom;
+  border-bottom: 10px solid #000;
+  cursor: pointer;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+ul:hover {
+  border-bottom-color: green;
+}
+ li {
+   clear: both;
+   display: inline-block;
+   height: 60px;
+   min-width: 100px;
+   border-radius: 25px;
+   background-color: grey;
+   display: table;
+   margin: 5px auto;
+   text-align: center;
+ }
+
+ul.active {
+  border-bottom-color: blue;
+}
+
+body {
+  text-align: center;
+}
