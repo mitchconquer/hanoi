@@ -6,6 +6,7 @@ function Board(options = {}) {
   let s = new Snake();
   this.snake = s;
   this.apples = [];
+  this.score = 0;
   this.speed = 150;
   this.gridSize = options.gridSize || 50;
   this.grid = this.createBoard();
@@ -64,6 +65,7 @@ Board.prototype.appleCollision = function () {
       // this.snake.addTo();
       this.snake.ateApple = true;
       this.apples.splice(i, 1);
+      this.score += 1;
       this.addApple();
       if (this.speed >= 75) {
         this.speed -= 25;

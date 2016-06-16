@@ -56,6 +56,12 @@ SnakeView.prototype.render = function () {
   this.clearBoard();
   this.renderSnake();
   this.renderApples();
+  this.renderScore();
+};
+
+SnakeView.prototype.renderScore = function () {
+  console.log(this.board.score);
+  $('h2').text(this.board.score);
 };
 
 SnakeView.prototype.gameOver = function () {

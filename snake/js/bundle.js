@@ -66,6 +66,7 @@
 	  let s = new Snake();
 	  this.snake = s;
 	  this.apples = [];
+	  this.score = 0;
 	  this.speed = 150;
 	  this.gridSize = options.gridSize || 50;
 	  this.grid = this.createBoard();
@@ -124,6 +125,7 @@
 	      // this.snake.addTo();
 	      this.snake.ateApple = true;
 	      this.apples.splice(i, 1);
+	      this.score += 1;
 	      this.addApple();
 	      if (this.speed >= 75) {
 	        this.speed -= 25;
@@ -328,6 +330,12 @@
 	  this.clearBoard();
 	  this.renderSnake();
 	  this.renderApples();
+	  this.renderScore();
+	};
+	
+	SnakeView.prototype.renderScore = function () {
+	  console.log(this.board.score);
+	  $('h2').text(this.board.score);
 	};
 	
 	SnakeView.prototype.gameOver = function () {
