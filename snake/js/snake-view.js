@@ -5,6 +5,7 @@ function SnakeView(board, gameSpace) {
   this.render();
   this.finished = false;
   $(document).on("keydown", this.keydownCallback.bind(this));
+  this.renderBoard();
   this.step();
 }
 
@@ -53,7 +54,6 @@ SnakeView.prototype.render = function () {
     this.gameOver();
   }
   this.clearBoard();
-  this.renderBoard();
   this.renderSnake();
   this.renderApples();
 };
@@ -64,7 +64,9 @@ SnakeView.prototype.gameOver = function () {
 };
 
 SnakeView.prototype.clearBoard = function () {
-  $(this.gameSpace).children().remove();
+  $(this.gameSpace).children().each(function() {
+    $(this).children().removeClass();
+  });
 };
 
 SnakeView.prototype.renderApples = function () {

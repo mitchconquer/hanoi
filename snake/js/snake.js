@@ -34,9 +34,7 @@ Snake.prototype.addToFront = function() {
       head.y + this.deltaY()));
 };
 
-Snake.prototype.addToBack = function () {
 
-}
 
 
 Snake.prototype.isOpposite = function(direction) {

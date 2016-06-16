@@ -45,7 +45,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Board = __webpack_require__(1);
-	const SnakeView = __webpack_require__(3);
+	const SnakeView = __webpack_require__(5);
 	$(() => {
 	  console.log("Document is ready!");
 	  const rootEl = $('.snake-game');
@@ -59,14 +59,14 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Snake = __webpack_require__(2);
-	const Apple = __webpack_require__(5);
+	const Apple = __webpack_require__(4);
 	
 	
 	function Board(options = {}) {
 	  let s = new Snake();
 	  this.snake = s;
 	  this.apples = [];
-	  this.speed = 25;
+	  this.speed = 150;
 	  this.gridSize = options.gridSize || 50;
 	  this.grid = this.createBoard();
 	  this.addApple();
@@ -125,10 +125,9 @@
 	      this.snake.ateApple = true;
 	      this.apples.splice(i, 1);
 	      this.addApple();
-	      // if (this.speed >= 75) {
-	      this.speed -= 25;
-	      console.log(this.speed);
-	      // }
+	      if (this.speed >= 75) {
+	        this.speed -= 25;
+	      }
 	    }
 	  }
 	  return false;
@@ -140,7 +139,7 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const Coord = __webpack_require__(4);
+	const Coord = __webpack_require__(3);
 	
 	function Snake() {
 	  this.direction = "N";
@@ -176,9 +175,7 @@
 	      head.y + this.deltaY()));
 	};
 	
-	Snake.prototype.addToBack = function () {
 	
-	}
 	
 	
 	Snake.prototype.isOpposite = function(direction) {
@@ -245,6 +242,34 @@
 /* 3 */
 /***/ function(module, exports) {
 
+	function Coord(x, y) {
+	 this.x = x;
+	 this.y = y;
+	}
+	
+	module.exports = Coord;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports) {
+
+	function Apple(gridSize) {
+	  this.x = this.getRandomCoord(0, gridSize - 1);
+	  this.y = this.getRandomCoord(0, gridSize - 1);
+	}
+	
+	Apple.prototype.getRandomCoord = function (min, max) {
+	  return Math.round(Math.random() * (max - min) + min);
+	};
+	
+	module.exports = Apple;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
 	
 	function SnakeView(board, gameSpace) {
 	  this.board = board;
@@ -252,6 +277,7 @@
 	  this.render();
 	  this.finished = false;
 	  $(document).on("keydown", this.keydownCallback.bind(this));
+	  this.renderBoard();
 	  this.step();
 	}
 	
@@ -300,7 +326,6 @@
 	    this.gameOver();
 	  }
 	  this.clearBoard();
-	  this.renderBoard();
 	  this.renderSnake();
 	  this.renderApples();
 	};
@@ -311,7 +336,9 @@
 	};
 	
 	SnakeView.prototype.clearBoard = function () {
-	  $(this.gameSpace).children().remove();
+	  $(this.gameSpace).children().each(function() {
+	    $(this).children().removeClass();
+	  });
 	};
 	
 	SnakeView.prototype.renderApples = function () {
@@ -351,34 +378,6 @@
 	};
 	
 	module.exports = SnakeView;
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports) {
-
-	function Coord(x, y) {
-	 this.x = x;
-	 this.y = y;
-	}
-	
-	module.exports = Coord;
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	function Apple(gridSize) {
-	  this.x = this.getRandomCoord(0, gridSize - 1);
-	  this.y = this.getRandomCoord(0, gridSize - 1);
-	}
-	
-	Apple.prototype.getRandomCoord = function (min, max) {
-	  return Math.round(Math.random() * (max - min) + min);
-	};
-	
-	module.exports = Apple;
 
 
 /***/ }
